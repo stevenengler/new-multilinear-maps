@@ -133,7 +133,6 @@ public:
 	encoding(public_parameters *pp, const mpz_class &value, unsigned level): pp(pp), value(value), level(level) {};
 
 	void samp(const public_parameters &, unsigned level);
-	encoding enc(unsigned level);
 	void rerand();
 
 	encoding &operator*=(const encoding &);
