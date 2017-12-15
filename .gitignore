@@ -1,3 +1,10 @@
+# Project-specific Files
+generate_pp
+key_exchange
+newmultimaps.py
+_newmultimaps.so
+newmultimaps_wrap.cxx
+
 # Compiled Object files
 *.slo
 *.lo
