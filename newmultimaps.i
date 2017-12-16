@@ -139,7 +139,7 @@ namespace mmap {
    try {
       $action
    } catch( std::logic_error ) {
-      PyErr_SetString(PyExc_RuntimeError, "test");
+      PyErr_SetString(PyExc_RuntimeError, "std::logic_error");
       SWIG_fail;
    }
 }

@@ -7,6 +7,8 @@ Public domain.
 #ifndef CRT_TREE_HPP
 #define CRT_TREE_HPP
 
+#include <stdexcept>
+
 class crt_tree
 {
 private:
@@ -53,6 +55,9 @@ public:
 			mpz_gcdext(g.get_mpz_t(),
 					crt_right.get_mpz_t(), crt_left.get_mpz_t(),
 					left->mod.get_mpz_t(), right->mod.get_mpz_t());
+			if(g != 1){
+				throw std::logic_error("g != 1");
+			}
 			assert(g == 1);
 
 			crt_left *= right->mod;
