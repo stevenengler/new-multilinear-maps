@@ -58,7 +58,7 @@ int main (int argc, char **argv)
 
 	// Generation of the parameters
 	auto generationtime_start = std::chrono::system_clock::now();
-	pp.generate();
+	pp.generate(true);
 	auto generationtime_end = std::chrono::system_clock::now();
 
 	// Save the parameters on disk

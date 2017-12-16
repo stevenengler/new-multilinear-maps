@@ -159,7 +159,7 @@ private:
 public:
 	public_parameters_generate(unsigned lambda, unsigned kappa, unsigned n, unsigned rho, unsigned etap);
 	~public_parameters_generate();
-	void generate();
+	void generate(bool print_time);
 	void save();
 
 private:

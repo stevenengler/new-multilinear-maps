@@ -32,7 +32,7 @@ private:
 public:
 	public_parameters_generate(unsigned lambda, unsigned kappa, unsigned n, unsigned rho, unsigned etap);
 	~public_parameters_generate();
-	void generate();
+	void generate(bool print_time);
 	void save();
 
 private:
@@ -141,9 +141,9 @@ bool parameters::save_mpz_array(mpz_class *a, unsigned n, const char *filename)
 	return true;
 }
 
-void public_parameters_generate::generate()
+void public_parameters_generate::generate(bool print_time)
 {
-	TIME("\tPrimes p",
+	TIME_IF_TRUE(print_time, "\tPrimes p",
 	// Primes p
 	p = new mpz_class[params.n];
 	_Pragma(STRINGIFY(omp parallel for))
@@ -153,7 +153,7 @@ void public_parameters_generate::generate()
 	}
 	)
 
-	TIME("\tx0, x0p, crt (new)",
+	TIME_IF_TRUE(print_time, "\tx0, x0p, crt (new)",
 	// x0 + crt
 	crt.init(p, params.n);
 	x0 = crt.get_mod();
@@ -165,7 +165,7 @@ void public_parameters_generate::generate()
 	x0p *= q;
 	)
 
-	TIME("\tg",
+	TIME_IF_TRUE(print_time, "\tg",
 	// Primes g
 	g = new mpz_class[params.n];
 	for (unsigned i = 0; i < params.n; i++)
@@ -174,7 +174,7 @@ void public_parameters_generate::generate()
 	}
 	)
 
-	TIME("\tz, z_invert (new)",
+	TIME_IF_TRUE(print_time, "\tz, z_invert (new)",
 	// Mask z & z_invert
 	zi = new mpz_class[params.n];
 	for (unsigned j = 0; j < params.n; j++)
@@ -204,7 +204,7 @@ void public_parameters_generate::generate()
 	z_mkappa = crt.do_crt(zki[params.kappa]);
 	)
 
-	TIME("\tCRT_coeffs_p and Qp",
+	TIME_IF_TRUE(print_time, "\tCRT_coeffs_p and Qp",
 	// CRT Coefficients & Shoup coefficients
 	CRT_coeffs_p = new mpz_class[params.n];
 	Qp = new mpz_class[2 * params.n];
@@ -215,19 +215,19 @@ void public_parameters_generate::generate()
 	}
 	)
 
-	TIME("\tN",
+	TIME_IF_TRUE(print_time, "\tN",
 	// N
 	Np = new mpz_class[2 * params.n];
 	generate_N();
 	)
 
-	TIME("\th",
+	TIME_IF_TRUE(print_time, "\th",
 	// h
 	h = new mpz_class[params.n];
 	generate_h();
 	)
 
-	TIME("\tGeneration yp, p_zt",
+	TIME_IF_TRUE(print_time, "\tGeneration yp, p_zt",
 	// yp = enc(0, kappa)
 	yp = new mpz_class[params.ne];
 	generate_yp();
@@ -248,12 +248,12 @@ void public_parameters_generate::generate()
 	generate_p_zt();
 	)
 
-	TIME("\tSampling x's",
+	TIME_IF_TRUE(print_time, "\tSampling x's",
 	// x's for sampling
 	x = new mpz_class[2 * params.lambda];
 	generate_x();
 	// )
-	// TIME("\tRerand pi",
+	// TIME_IF_TRUE(print_time, "\tRerand pi",
 	// pi's for rerandomization
 	pi = (mpz_class **) malloc(2 * sizeof(mpz_class *));
 	pi[0] = new mpz_class[params.delta];
@@ -262,7 +262,7 @@ void public_parameters_generate::generate()
 	generate_pi(1);
 	)
 	
-	TIME("\ty",
+	TIME_IF_TRUE(print_time, "\ty",
 	// y = enc(1, 1)
 	generate_y();
 	)

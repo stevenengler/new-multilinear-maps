@@ -31,4 +31,11 @@ double get_time_ms(T const &start, T const &end)
 	printf("%s: OK\n", y);
 #endif
 
+#define TIME_IF_TRUE(z, y, x) \
+  if(z){ \
+	  TIME(y, x) \
+  }else{ \
+		x; \
+	}
+
 #endif
