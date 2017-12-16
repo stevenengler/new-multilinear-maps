@@ -1,18 +1,21 @@
-# Proof-of-Concept Implementation of the "New" Multilinear Maps over the Integers
+# Python Wrapper for a Proof-of-Concept Implementation of the "New" Multilinear Maps over the Integers
 
-This is an implementation of the "new" variant of the cryptographic multilinear maps over the Integers.
+This is a Python wrapper for an implementation of the "new" variant of the cryptographic multilinear maps over the Integers.
+
+This is a fork of the [original repository](https://github.com/tlepoint/new-multilinear-maps), but includes some changes as well as the Python wrapper.
 
 This variant is described in the following article:
 
 [1] J.-S. Coron, T. Lepoint, M. Tibouchi, "New Multilinear Maps over the Integers". Available on http://eprint.iacr.org
 
-and build upon the following article:
+and builds upon the following article:
 
 [2] J.-S. Coron, T. Lepoint, M. Tibouchi, "Practical Multilinear Maps over the Integers". Available at http://eprint.iacr.org/2013/183
 
-This C++ proof-of-concept requires:
+This C++ proof-of-concept and Python wrapper requires:
 - *GMP* http://gmplib.org/
 - *fplll* (to generate parameters) https://github.com/dstehle/fplll
+- *SWIG* http://www.swig.org/
 
 HOW TO RUN?
 -----------
