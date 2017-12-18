@@ -167,6 +167,15 @@ public:
 	void generate(bool print_time);
 	void save();
 
+	std::string get_str_x0p(int base);
+	std::vector<std::string> get_str_x(int base);
+	std::vector<std::string> get_str_pi0(int base);
+	std::vector<std::string> get_str_pi1(int base);
+	std::string get_str_y(int base);
+	std::string get_str_N(int base);
+	std::vector<std::string> get_str_yp(int base);
+	std::string get_str_p_zt(int base);
+
 private:
 	void generate_p(unsigned i);
 	void generate_g(unsigned i);
@@ -182,6 +191,9 @@ private:
 	void generate_p_zt_coeff(unsigned i);
 
 	void multisamp(mpz_class **results, mpz_class ***values, unsigned m, unsigned level);
+
+	std::string get_mpz_str_generic(mpz_class &a, int base);
+	std::vector<std::string> get_mpz_str_array_generic(mpz_class *a, unsigned n, int base);
 };
 
 }

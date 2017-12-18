@@ -35,6 +35,15 @@ public:
 	void generate(bool print_time);
 	void save();
 
+	std::string get_str_x0p(int base);
+	std::vector<std::string> get_str_x(int base);
+	std::vector<std::string> get_str_pi0(int base);
+	std::vector<std::string> get_str_pi1(int base);
+	std::string get_str_y(int base);
+	std::string get_str_N(int base);
+	std::vector<std::string> get_str_yp(int base);
+	std::string get_str_p_zt(int base);
+
 private:
 	void generate_p(unsigned i);
 	void generate_g(unsigned i);
@@ -50,6 +59,9 @@ private:
 	void generate_p_zt_coeff(unsigned i);
 
 	void multisamp(mpz_class **results, mpz_class ***values, unsigned m, unsigned level);
+
+	std::string get_mpz_str_generic(mpz_class &a, int base);
+	std::vector<std::string> get_mpz_str_array_generic(mpz_class *a, unsigned n, int base);
 };
 
 }
@@ -118,6 +130,50 @@ public_parameters_generate::~public_parameters_generate()
 	{
 		delete[] ziinv;
 	}
+}
+
+std::string public_parameters_generate::get_mpz_str_generic(mpz_class &a, int base){
+	return a.get_str(base);
+}
+
+std::vector<std::string> public_parameters_generate::get_mpz_str_array_generic(mpz_class *a, unsigned n, int base){
+	std::vector<std::string> vals;
+	for(int i=0; i<n; i++){
+		vals.push_back(a[i].get_str(base));
+	}
+	return vals;
+}
+
+std::string public_parameters_generate::get_str_x0p(int base){
+	return get_mpz_str_generic(x0p, base);
+}
+
+std::vector<std::string> public_parameters_generate::get_str_x(int base){
+	return get_mpz_str_array_generic(x, 2*params.lambda, base);
+}
+
+std::vector<std::string> public_parameters_generate::get_str_pi0(int base){
+	return get_mpz_str_array_generic(pi[0], params.delta, base);
+}
+
+std::vector<std::string> public_parameters_generate::get_str_pi1(int base){
+	return get_mpz_str_array_generic(pi[1], params.delta, base);
+}
+
+std::string public_parameters_generate::get_str_y(int base){
+	return get_mpz_str_generic(y, base);
+}
+
+std::string public_parameters_generate::get_str_N(int base){
+	return get_mpz_str_generic(N, base);
+}
+
+std::vector<std::string> public_parameters_generate::get_str_yp(int base){
+	return get_mpz_str_array_generic(yp, params.ne, base);
+}
+
+std::string public_parameters_generate::get_str_p_zt(int base){
+	return get_mpz_str_generic(p_zt, base);
 }
 
 bool parameters::save_mpz(mpz_class &a, const char *filename)
