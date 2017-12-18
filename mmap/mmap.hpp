@@ -138,6 +138,10 @@ public:
 
 	encoding &operator*=(const encoding &);
 	encoding &operator=(const encoding &);
+	void multiply_assign(const encoding &c);
+	void assign(const encoding &c);
+
+	std::string get_value_str(int base);
 };
 
 }
@@ -488,20 +492,36 @@ void encoding::rerand()
 
 encoding &encoding::operator*=(const encoding &c)
 {
-	assert(pp == c.pp);
-	mpz_mul(value.get_mpz_t(), value.get_mpz_t(), c.value.get_mpz_t());
-	mpz_mod(value.get_mpz_t(), value.get_mpz_t(), pp->x0p.get_mpz_t());
-	level += c.level;
+	multiply_assign(c);
 	return *this;
 }
 
 encoding &encoding::operator=(const encoding &c)
 {
+	assign(c);
+	return *this;
+}
+
+void encoding::multiply_assign(const encoding &c)
+{
+	assert(pp == c.pp);
+	mpz_mul(value.get_mpz_t(), value.get_mpz_t(), c.value.get_mpz_t());
+	mpz_mod(value.get_mpz_t(), value.get_mpz_t(), pp->x0p.get_mpz_t());
+	level += c.level;
+}
+
+void encoding::assign(const encoding &c)
+{
 	pp = c.pp;
 	value = mpz_class(c.value);
 	level = c.level;
-	return *this;
 }
+
+std::string encoding::get_value_str(int base)
+{
+	return value.get_str(base);
+}
+
 
 }
 

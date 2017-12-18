@@ -121,6 +121,10 @@ public:
 
 	encoding &operator*=(const encoding &);
 	encoding &operator=(const encoding &);
+	void multiply_assign(const encoding &c);
+	void assign(const encoding &c);
+
+	std::string get_value_str(int base);
 };
 
 }
