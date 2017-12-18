@@ -93,6 +93,7 @@ public:
 	void enc(mpz_class &rop, unsigned level);
 	void rerand(mpz_class &rop, unsigned level);
 	mpz_class ext(encoding &, unsigned nu = 0);
+	std::string ext_str(encoding &c, unsigned nu, int base);
 
 protected:
 	void encrypt(mpz_class &, mpz_class *values, unsigned level = 0);

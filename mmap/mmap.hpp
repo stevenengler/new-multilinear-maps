@@ -110,6 +110,7 @@ public:
 	void enc(mpz_class &rop, unsigned level);
 	void rerand(mpz_class &rop, unsigned level);
 	mpz_class ext(encoding &, unsigned nu = 0);
+	std::string ext_str(encoding &c, unsigned nu, int base);
 
 protected:
 	void encrypt(mpz_class &, mpz_class *values, unsigned level = 0);
@@ -448,6 +449,11 @@ mpz_class public_parameters::ext(encoding &c, unsigned nu)
 	mpz_centered_mod(rop.get_mpz_t(), rop.get_mpz_t(), N.get_mpz_t());
 	rop >>= (params.xi - nu);
 	return rop;
+}
+
+std::string public_parameters::ext_str(encoding &c, unsigned nu, int base)
+{
+	return ext(c, nu).get_str(base);
 }
 
 encoding::encoding(const public_parameters &_pp, unsigned _level)
