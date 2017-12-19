@@ -4,6 +4,7 @@ key_exchange
 newmultimaps.py
 _newmultimaps.so
 newmultimaps_wrap.cxx
+newmultimaps_wrap.cpp
 
 # Compiled Object files
 *.slo
