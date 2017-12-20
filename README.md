@@ -21,15 +21,15 @@ This C++ proof-of-concept and Python wrapper requires:
 
 You have two choices for building the library.
 1. Makefile - This will build the Python library into the current directory (you will have to install it manually, or set your PYTHONPATH), and also build the `generate_pp` and `key_exchange` programs.
-2. Setuptools `setup.py` - This will build and install the Python library into the current Python environment, but not build any other libraries/programs.
+2. Distutils `setup.py` - This will build and install the Python library into the current Python environment, but not build any other libraries/programs.
 
 ### Makefile
 
 You may need to edit the `makefile` to set the include and library directories. Then run `make`. You should see the new files `generate_pp`, `key_exchange`, `_newmultimaps.so`, and `newmultimaps.py` (the first two aren't used by the Python library, but might be useful for testing). To use the Python library, set the PYTHONPATH environment variable to the current directory (containing `_newmultimaps.so` and `newmultimaps.py`), or install the files manually into the Python `site_packages`.
 
-### Setuptools
+### Distutils
 
-You may need to edit the `setup.py` file to set the include and library directories. Then run `python setup.py install`.
+You may need to edit the `setup.py` file to set the include and library directories. Then run `pip install .` or `python setup.py install` (the former won't leave build files in the current directory).
 
 ## Using the Python library
 
