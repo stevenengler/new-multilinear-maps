@@ -29,7 +29,7 @@ You may need to edit the `makefile` to set the include and library directories. 
 
 ### Setuptools
 
-You may need to edit the `setup.py` file to set the include and library directories. Then run either `pip install .` or `python setup.py install`. The former is recommended since you can then easily `pip uninstall newmultimaps` if desired in the future.
+You may need to edit the `setup.py` file to set the include and library directories. Then run `python setup.py install`.
 
 ## Using the Python library
 
